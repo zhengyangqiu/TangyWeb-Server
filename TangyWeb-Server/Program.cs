@@ -17,13 +17,22 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
 }
 
+else {
+    app.UseDeveloperExceptionPage();
+
+
+}
 
 app.UseStaticFiles();
 
 app.UseRouting();
 
+//add signalR connection
 app.MapBlazorHub();
+//default page if can't routing
 app.MapFallbackToPage("/_Host");
 
 app.Run();
 
+
+//it is the program to start the application

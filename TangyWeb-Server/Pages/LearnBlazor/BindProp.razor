@@ -1,0 +1,36 @@
+﻿@page "/learnBlazor/bindProd"
+
+@*one way data binding*@
+
+<h3>Product</h3>
+
+
+Name:@Product.Name<br />
+Active:@Product.IsActive<br />
+
+Price: @Product.Price<br/>
+
+@*bind-value could make two way data binding*@ 
+
+Price: <input type="number" @bind-value="@Product.Price" @bind-value:event="oninput">
+
+
+
+
+@code {
+
+    @*create product object*@
+
+    Tangy_Model.LearnBlazorModels.Demo_Product Product = new()
+
+    {
+        Id = 1,
+        Name = "Rose Cancel",
+        IsActive = true,
+        Price=10.99
+
+
+    };
+
+}
+

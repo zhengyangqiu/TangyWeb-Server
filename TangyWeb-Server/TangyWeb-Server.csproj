@@ -8,4 +8,15 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'TangyWeb-Server' " />
+  <ItemGroup>
+    <None Remove="Pages\LearnBlazor\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\LearnBlazor\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tangy_Model\Tangy_Model.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
