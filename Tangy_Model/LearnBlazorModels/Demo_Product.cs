@@ -5,10 +5,13 @@ namespace Tangy_Model.LearnBlazorModels
     {
        
 
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public bool IsActive { get; set; }
-            public double Price { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool IsActive { get; set; }
+        public double Price { get; set; }
+        public IEnumerable<Demo_ProductProp> ProductProperties { get; set; } 
+
+
           
     }
 }
