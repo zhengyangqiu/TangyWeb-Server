@@ -1,40 +1,48 @@
 ﻿@page "/learnBlazor/bindProd"
+@using Tangy_Model.LearnBlazorModels
+<div class="row border" p-2>
+    @*one way data binding*@
 
-@*one way data binding*@
-
-<h3>Product</h3>
+    <h3 class="text-primary">Product Summary</h3><hr/>
 
 
-Name:@Product.Name<br />
-Active:@Product.IsActive<br />
+    Name:@Product.Name<br />
+    Active:@Product.IsActive<br />
 
-Price: @Product.Price<br/>
+    Price: @Product.Price<br />
 
-This product is :@(Product.IsActive?"Active":"InActive")<br />
-Property selected:@selectedProp<br/>
+    This product is :@(Product.IsActive?"Active":"InActive")<br />
+    Property selected:@selectedProp<br />
 
-@if (!String.IsNullOrWhiteSpace(selectedProp))
+    @if (!String.IsNullOrWhiteSpace(selectedProp))
     {
-        <p>Property Value : @Product.ProductProperties.FirstOrDefault(u=>u.Key==selectedProp)</p>
+        <p>Property Value : @Product.ProductProperties.FirstOrDefault(u => u.Key == selectedProp).Value</p>
     }
+
+</div>
 
 
 <br />
 
 
 
-@*bind-value could make two way data binding*@ 
-
-Active:<input type="checkbox"@bind-value="Product.IsActive"checked="@(Product.IsActive?"checked":null)"><br />
-Price: <input type="number" @bind-value="@Product.Price" @bind-value:event="oninput"><br />
+@*bind-value could make two way data binding*@
+<div class="row border p-2">
+Active:
+<input type="checkbox" @bind-value="Product.IsActive" checked="@(Product.IsActive?"checked":null)">
+<br />
+Price:
+<input type="number" @bind-value="@Product.Price" @bind-value:event="oninput">
+<br />
 Product Properties:
 <select @bind="selectedProp">
     @foreach (var prop in Product.ProductProperties)
-        {
-            <option value="@prop.Key">@prop.Key</option>
-        }
+    {
+        <option value="@prop.Key">@prop.Key</option>
+    }
 </select>
 
+</div>
 
 
 @code {
@@ -43,20 +51,20 @@ Product Properties:
 
     @*create product object*@
 
-    Tangy_Model.LearnBlazorModels.Demo_Product Product = new()
+    Demo_Product Product = new()
 
     {
         Id = 1,
         Name = "Rose Cancel",
         IsActive = true,
-        Price=10.99,
+        Price = 10.99,
 
         ProductProperties = new List<Tangy_Model.LearnBlazorModels.Demo_ProductProp>()
 
-        {
-            new Tangy_Model.LearnBlazorModels.Demo_ProductProp{ id=1,Key="Color",Value="Black"},
-            new Tangy_Model.LearnBlazorModels.Demo_ProductProp{ id=2,Key="Flavor",Value="Rose Jasmine"},
-            new Tangy_Model.LearnBlazorModels.Demo_ProductProp{ id=3,Key="Size",Value="20oz"},
+    {
+            new Demo_ProductProp{ id=1,Key="Color",Value="Black"},
+            new Demo_ProductProp{ id=2,Key="Flavor",Value="Rose Jasmine"},
+            new Demo_ProductProp{ id=3,Key="Size",Value="20oz"},
 
         }
 
