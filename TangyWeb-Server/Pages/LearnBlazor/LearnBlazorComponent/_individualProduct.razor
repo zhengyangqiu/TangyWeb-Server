@@ -1,11 +1,15 @@
 ﻿<div class="bg-light border p-2 col-5 m-1">
-    <h4 class="text-secondary">Product-@prod.Id</h4>
-    Name- @prod.Name<br />
-    Show Properties : <input type="checkbox" @bind-value="prod.IsActive" checked="@(prod.IsActive?"checked":null)" />
 
-    @if (prod.IsActive)
+    <h4 class="text-secondary">Product-@Product.Id</h4>
+    @*checkbox will call favoriteupdate method in parents component,it will invoke with FavoriteUpdated methods *@
+
+    <input type="checkbox" @onchange="FavoriteUpdated" /> Add to Favorite<br /><br />   @*1*@
+    Name- @Product.Name<br />
+    Show Properties : <input type="checkbox" @bind-value="Product.IsActive" checked="@(Product.IsActive?"checked":null)" />
+
+    @if (Product.IsActive)
     {
-        @foreach (var prodProp in prod.ProductProperties)
+        @foreach (var prodProp in Product.ProductProperties)
 
         {
             <p>@prodProp.Key - @prodProp.Value</p>
@@ -15,7 +19,7 @@
 
     <br />
     @*add button component*@
-    <_EditDeleteButton IsActive="@prod.IsActive">
+    <_EditDeleteButton IsActive="@Product.IsActive">
 
 
     </_EditDeleteButton>
@@ -29,8 +33,27 @@
 @code {
 
     [Parameter]
+    public Demo_Product Product { get; set; }
 
-    public Demo_Product prod { get; set; }
+    [Parameter]@*5*@
+    public EventCallback<bool> OnFavoriteUpdated { get; set; }
+
+
+    private async Task FavoriteUpdated(ChangeEventArgs e)@*2*@
+    {
+        //invoke the parent method, pass parent methods as a parameter and capture it here as call back
+
+        await OnFavoriteUpdated.InvokeAsync((bool)e.Value);
+        @*6*@
+    }
+
+
+
 
 }
 
+
+
+
+@*inside individual project, we have onchange event, that is invoking the 'FavoriteUpdated' method, this child method will invoke the parents component
+    which is 'FavouriteCountUpdated', this method will capture OnFavoriteUpdated callback,return bool*@
