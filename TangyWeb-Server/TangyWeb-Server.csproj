@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Pages\LearnBlazor\" />
     <None Remove="Pages\LearnBlazor\LearnBlazorComponent\" />
+    <None Remove="Microsoft.AspNetCore.Authentication" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\LearnBlazor\" />
@@ -20,5 +21,8 @@
     <ProjectReference Include="..\Tangy_Model\Tangy_Model.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿<div class="bg-light border p-2 col-5 m-1">
+﻿<div class="bg-light border p-2 col-5 m-1" @onclick="(args)=>LastSelectedProduct(args,Product.Name)">
 
     <h4 class="text-secondary">Product-@Product.Id</h4>
     @*checkbox will call favoriteupdate method in parents component,it will invoke with FavoriteUpdated methods *@
@@ -38,6 +38,12 @@
     [Parameter]@*5*@
     public EventCallback<bool> OnFavoriteUpdated { get; set; }
 
+    [Parameter]
+    public EventCallback<string> OnLastSelectedProductChange { get; set; }
+
+
+
+
 
     private async Task FavoriteUpdated(ChangeEventArgs e)@*2*@
     {
@@ -48,12 +54,21 @@
     }
 
 
+    private async Task LastSelectedProduct(MouseEventArgs e,string name)
+    {
+        await OnLastSelectedProductChange.InvokeAsync(name);
+
+
+        //invoke the parent method, pass parent methods as a parameter and capture it here as call back
+
+
+    }
+
+
+
 
 
 }
-
-
-
 
 @*inside individual project, we have onchange event, that is invoking the 'FavoriteUpdated' method, this child method will invoke the parents component
     which is 'FavouriteCountUpdated', this method will capture OnFavoriteUpdated callback,return bool*@
